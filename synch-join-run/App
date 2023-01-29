@@ -1,29 +1,31 @@
 package joinANDsync;
 class mythread implements Runnable {
-    private int count;
+    private int cnt;
 
     @Override
     public void run() {
         for (int i = 0; i < 20000; i++) {
             synchronized (this){
-                count++;
+                cnt++;
             }
         }
     }
 
     public int getCount() {
-        return count;
+        return cnt;
     }
 }
 
 
 public class App {
+    private static int count = 0;
+    public static synchronized void add(){
+        count++;
+    }
     public static void main(String[] args) {
         mythread first = new mythread();
-
         Thread t1 = new Thread(first);
         Thread t2 = new Thread(first);
-
         t1.start();
         t2.start();
         try {
@@ -32,8 +34,40 @@ public class App {
         } catch (InterruptedException e) {
 
         }
+        System.out.println(first.getCount());;
 
-
-        System.out.println(first.getCount());
+        // anonymous thread way 1
+//        Thread otherway1 = new Thread(new Runnable() {
+//            @Override
+//            public  void run(){
+//                for (int i = 0; i <10000 ; i++) {
+//                    add();
+//                    synchronized (this) {
+////                    count++;
+//                    }
+//                }
+//            }
+//        });
+//        // anonymous thread way 2
+//        Thread otherway2 = new Thread(){
+//            public synchronized void run(){
+//                for (int i = 0; i <10000 ; i++) {
+//                    add();
+//                    synchronized (this) {
+////                    count++;
+//                    }
+//                }
+//            }
+//        };
+//        otherway1.start();
+//        otherway2.start();
+//
+//        try {
+//            otherway1.join();
+//            otherway2.join();
+//        } catch (InterruptedException e) {
+//            throw new RuntimeException(e);
+//        }
+//        System.out.println(count);
     }
 }
