@@ -18,10 +18,10 @@ class mythread implements Runnable {
 
 
 public class App {
-    private static int count = 0;
-    public static synchronized void add(){
-        count++;
-    }
+//    private static int count = 0;
+//    public static synchronized void add(){
+//        count++;
+//    }
     public static void main(String[] args) {
         mythread first = new mythread();
         Thread t1 = new Thread(first);
