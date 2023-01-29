@@ -1,0 +1,39 @@
+package joinANDsync;
+class mythread implements Runnable {
+    private int count;
+
+    @Override
+    public void run() {
+        for (int i = 0; i < 20000; i++) {
+            synchronized (this){
+                count++;
+            }
+        }
+    }
+
+    public int getCount() {
+        return count;
+    }
+}
+
+
+public class App {
+    public static void main(String[] args) {
+        mythread first = new mythread();
+
+        Thread t1 = new Thread(first);
+        Thread t2 = new Thread(first);
+
+        t1.start();
+        t2.start();
+        try {
+            t1.join();
+            t2.join();
+        } catch (InterruptedException e) {
+
+        }
+
+
+        System.out.println(first.getCount());
+    }
+}
