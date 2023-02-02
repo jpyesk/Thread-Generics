@@ -18,16 +18,30 @@ public class Inner<T> implements Node<T> {
     }
 
     @Override
-    public T get(int i) {
-        return Iterate(this,i, this.size());
-
+    public T get(int i)
+    {
+        return Iterate(this, i + 1);
     }
-    private T Iterate(Inner<T> node, int index, int count){
-        count = node.size();
-        if (index == count) return this.left.get(0);
-        if (index < count) return Iterate((Inner<T>) node.right,index, count - node.lsize);
-        else return Iterate((Inner<T>) node.left,index,count - node.lsize);
+    private T Iterate(Node<T> inner1, int index)
+    {
+        var inner = (Inner<T>)inner1;
+//        var count = inner.size();
+//        if (index == count) return inner.Right.get(0);
+//        if (index < count) return Iterate(inner.Left, index);
+//        if (index > count) return Iterate(inner.Right, index - inner.Left.size());
 
+        var count = inner.size();
+        if (index == count) return inner.right.get(0);
+        if (count == 2)
+        {
+            if (index == 1) return inner.left.get(0);
+            if (index == 2) return inner.right.get(0);
+        }
+        if (index < count)
+        {
+            return Iterate(inner.left, index);
+        }
+        return Iterate(inner.right, index - inner.left.size());
     }
 
     @Override
