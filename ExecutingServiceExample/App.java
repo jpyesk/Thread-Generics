@@ -11,8 +11,10 @@ import java.util.concurrent.Future;
 public class App {
     public static void main(String[] args) {
         ExecutorService exec = Executors.newFixedThreadPool(2);
-        for (int i =0; i < 10; i++){
-           exec.execute(new Task(String.valueOf(i)));
+        String[] arr = new String[]{"first","second","third","fourth","fifth"};
+        for (int i = 0; i <arr.length ; i++) {
+            exec.execute(new Task(arr[i]));
         }
+        exec.shutdown();
     }
 }
