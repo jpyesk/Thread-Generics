@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Semaphore;
+// basically semaphores is like wait and notify, it lets "permit raodenobis "threads daasrulos run funqcia da mere sxvam daikavos jeri
 
 public class SemaphoreMain {
     public static void main(String[] args) {
